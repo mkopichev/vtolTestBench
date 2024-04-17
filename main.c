@@ -1,5 +1,7 @@
 #include "inc/common.h"
 
+extern uint16_t potentiometerValue;
+
 void initAll(void);
 
 int main(void) {
@@ -8,7 +10,8 @@ int main(void) {
 
     while(1) {
 
-        uartTransmitStr("A\r\n");
+        uartTransmitDec(potentiometerValue);
+        uartTransmitStr("\r\n");
     }
 }
 
@@ -16,5 +19,6 @@ void initAll() {
 
     DDRB |= (1 << 5);
     uartInit();
+    potentiometerInit();
     _delay_ms(100);
 }

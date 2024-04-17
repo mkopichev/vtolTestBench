@@ -5,6 +5,7 @@
     "AVR.programmer.port": "COM3",
     "AVR.programmer.rate": 115200,
     "files.associations": {
-        "interrupt.h": "c"
+        "interrupt.h": "c",
+        "potentiomter.h": "c"
     }
 }
