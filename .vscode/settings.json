@@ -1,0 +1,10 @@
+{
+    "AVR.device.type": "atmega328p",
+    "AVR.device.frequency": 16000000,
+    "AVR.programmer.type": "arduino",
+    "AVR.programmer.port": "COM3",
+    "AVR.programmer.rate": 115200,
+    "files.associations": {
+        "interrupt.h": "c"
+    }
+}
