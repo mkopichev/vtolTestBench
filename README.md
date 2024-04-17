@@ -1,2 +1,2 @@
-AVR ATmega328P 16 MHz
+AVR ATmega328P 16 MHz <br>
 Potentiometer ADC0
