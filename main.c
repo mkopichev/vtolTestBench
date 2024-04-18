@@ -17,7 +17,7 @@ int main(void) {
 
 void initAll() {
 
-    DDRB |= (1 << 5);
+    serviceLedInit();
     uartInit();
     potentiometerInit();      
     _delay_ms(100);
