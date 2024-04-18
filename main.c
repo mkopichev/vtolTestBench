@@ -19,6 +19,6 @@ void initAll() {
 
     DDRB |= (1 << 5);
     uartInit();
-    potentiometerInit();
+    potentiometerInit();      
     _delay_ms(100);
 }
