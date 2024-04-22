@@ -19,6 +19,7 @@ void initAll() {
 
     serviceLedInit();
     uartInit();
-    potentiometerInit();      
+    potentiometerInit();
+    motorInit();
     _delay_ms(100);
 }
