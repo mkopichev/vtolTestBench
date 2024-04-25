@@ -3,19 +3,19 @@
 void serviceLedInit(void) {
 
     DDRB |= (1 << 5);
-    TCCR0B = (1 << CS01); // prescaler 8
-    TIMSK0 = (1 << TOIE0);
+    TCCR2B = (1 << CS21); // prescaler 8
+    TIMSK2 = (1 << TOIE2);
     sei();
 }
 
-ISR(TIMER0_OVF_vect) { // 128 us ovf period
+ISR(TIMER2_OVF_vect) { // 128 us ovf period
 
-    static uint16_t t0_counter = 0;
+    static uint16_t t2_counter = 0;
 
-    if(t0_counter < ((LED_FLASHING_PERIOD * 1000000.0) / 128.0)) {
-        t0_counter++;
+    if(t2_counter < ((LED_FLASHING_PERIOD * 1000000.0) / 128.0)) {
+        t2_counter++;
     } else {
-        t0_counter = 0;
+        t2_counter = 0;
         PORTB ^= (1 << 5);
     }
 }

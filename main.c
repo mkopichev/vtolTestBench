@@ -10,6 +10,7 @@ int main(void) {
 
     while(1) {
 
+        motorLaunch(MOTOR_CW, 0);
         uartTransmitDec(potentiometerValue);
         uartTransmitStr("\r\n");
     }

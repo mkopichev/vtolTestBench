@@ -20,5 +20,5 @@ void motorLaunch(bool direction, uint8_t speed) {
         OCR0B = speed;
         break;
     }
-    _delay_ms(2);
+    _delay_ms(1);
 }
