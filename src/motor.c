@@ -1,24 +1,19 @@
 #include "../inc/motor.h"
 
+extern float controlValue = 0;
 void motorInit(void) {
-
-    DDRD |= (1 << 5) | (1 << 6);
+    DDRD |= (1 << 3) | (1 << 4) | (1 << 5) | (1 << 6);
+    PORTD |= (1 << 3) | (1 << 4);
     // PWM on OC0A and OC0B, PWM frequency 7.8 kHz
-    TCCR0A = (1 << COM0A1) | (1 << COM0B1) | (1 << WGM01) | (1 << WGM00);
-    TCCR0B = (1 << CS01);
+    TCCR0A = (1 << COM0A1) | (1 << COM0B1) | (1 << WGM01) | (1 << WGM00); // Fast PWM
+    TCCR0B = (1 << CS01);                                                 // prescaler 8
+    TIMSK0 = (1 << TOIE0);
+    sei();
 }
 
-void motorLaunch(bool direction, uint8_t speed) {
 
-    switch(direction) {
-    case MOTOR_CW:
-        OCR0B = 0;
-        OCR0A = speed;
-        break;
-    case MOTOR_CCW:
-        OCR0A = 0;
-        OCR0B = speed;
-        break;
-    }
-    _delay_ms(1);
+void motorLaunch(uint8_t speed) {
+
+    OCR0B = 0;
+    OCR0A = speed;
 }

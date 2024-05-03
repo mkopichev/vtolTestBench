@@ -1,7 +1,7 @@
 #include "inc/common.h"
 
-extern uint16_t potentiometerValue;
-
+//extern uint16_t potentiometerValue;
+extern uint16_t filteredValue;
 void initAll(void);
 
 int main(void) {
@@ -9,9 +9,8 @@ int main(void) {
     initAll();
 
     while(1) {
-
-        motorLaunch(MOTOR_CW, 0);
-        uartTransmitDec(potentiometerValue);
+        void motorLaunch(50);
+        uartTransmitDec(filteredValue);
         uartTransmitStr("\r\n");
     }
 }
@@ -22,5 +21,6 @@ void initAll() {
     uartInit();
     potentiometerInit();
     motorInit();
+    //controlInit();
     _delay_ms(100);
 }
