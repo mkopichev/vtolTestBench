@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-#define VALUE_INSTALL 512
+#define VALUE_INSTALL 512.0
 
 void controlInit(void);
 

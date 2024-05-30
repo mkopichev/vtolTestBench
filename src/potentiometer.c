@@ -1,18 +1,18 @@
-#include "../inc/potentiomter.h"
+#include "../inc/potentiometer.h"
 
 uint16_t potentiometerValue = 0;
-uint16_t filteredValue = 0;
+float filteredValue;
 void potentiometerInit(void) {
 
-    ADCSRA = (1 << ADEN) | (1 << ADSC) | (1 << ADIE) | (1 << ADPS2);
+    ADCSRA = (1 << ADEN) | (1 << ADSC) | (1 << ADIE) | (1 << ADPS1) |  (1 << ADPS0);
     ADMUX = (1 << REFS0) | POTENTIOMETER_ADC_CHANNEL;
     sei();
 }
 
-ISR(ADC_vect){
+ISR(ADC_vect) {
 
     potentiometerValue = ADCL | (ADCH << 8);
-    filteredValue=(uint16_t(filteredValue*0.3+potentiometerValue*0.7));
+    filteredValue = (filteredValue * 0.99) + (potentiometerValue * 0.01);
     ADMUX = (1 << REFS0) | POTENTIOMETER_ADC_CHANNEL;
     ADCSRA |= (1 << ADSC);
 }

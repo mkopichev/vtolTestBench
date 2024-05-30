@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "uart.h"
-#include "potentiomter.h"
+#include "potentiometer.h"
 #include "serviceLed.h"
 #include "motor.h"
 #include "control.h"
