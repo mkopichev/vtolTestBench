@@ -1,31 +1,19 @@
 #include "inc/common.h"
 
-//extern uint16_t potentiometerValue;
-extern float filteredValue;
-extern float valuePID;
-void initAll(void);
+extern float potFilteredValue;
+extern float pidOutput;
 
 int main(void) {
 
     initAll();
 
     while(1) {
-        //motorLaunch(200);
-        // uarTransmitFloat(filteredValue);
-        // uartTransmitStr("\t");
-        uarTransmitFloat(valuePID);
-        //uartTransmitDec(filteredValue);
+
+        uartTransmitStr("potValue: ");
+        uarTransmitFloat(potFilteredValue);
+        uartTransmitStr("\t");
+        uartTransmitStr("pidOutput: ");
+        uarTransmitFloat(pidOutput);
         uartTransmitStr("\r\n");
-        
     }
-}
-
-void initAll() {
-
-    serviceLedInit();
-    uartInit();
-    potentiometerInit();
-    motorInit();
-   controlInit();
-    _delay_ms(100);
 }

@@ -1,43 +1,31 @@
 #include "../inc/control.h"
-extern float filteredValue;
+extern float potFilteredValue;
 
-float controlValue = 0.0, valuePID = 0.0;
-float errorPrevious = 0.0, errorPresent = 0.0;
-float KpDistant = 0.9, KiDistant = 0.9, KdDistant = 0.2;
-float KpNear = 1.0, KiNear = 2.0, KdNear = 0.021;
-float integral = 0.0;
-float dif = 0.0;
+float pidOutput = 0.0, errorIntegral = 0.0, errorDif = 0.0, errorPrevious = 0.0, errorCurrent = 0.0;
+float Kp = 0.95, Ki = 0.85, Kd = 0.2;
 float dt = 2.5 / 1000.0;
 
 void controlInit(void) {
+
     TCCR1B = (1 << CS11); // prescaler 8
     TIMSK1 = (1 << TOIE1);
-    TCNT1 = 0xEC7B;
+    TCNT1 = 0xEC78; // freq = 400 Hz
     sei();
 }
 
-ISR(TIMER1_OVF_vect) {
-    TCNT1 = 0xEC7B;
+ISR(TIMER1_OVF_vect) { // executes once in 2.5 ms
 
-    // if(VALUE_INSTALL < filteredValue) {
-    //     errorPresent = filteredValue - ;
-    // }
-    errorPresent = VALUE_INSTALL - filteredValue;
-    integral += errorPresent;
-    // if(integral > 10000) {
-    //     integral = 10000;
-    // } 
-    dif = (errorPresent - errorPrevious);
-    errorPrevious = errorPresent;
-    // if (errorPresent<10){
-    //     valuePID = (KpNear * errorPresent) + (KiNear * integral * dt) + (KdNear * dif / dt);}
-    // else
-    // {
-        valuePID = (KpDistant * errorPresent) + (KiDistant * integral * dt) + (KdDistant * dif / dt);
-    // }
-    if(valuePID > 200.0) {
-        valuePID = 200.0;
+    TCNT1 = 0xEC78;
+    errorCurrent = VALUE_SETPOINT - potFilteredValue;
+    errorIntegral += errorCurrent;
+    errorDif = (errorCurrent - errorPrevious);
+    errorPrevious = errorCurrent;
+
+    pidOutput = (Kp * errorCurrent) + (Ki * errorIntegral * dt) + (Kd * errorDif / dt);
+
+    if((pidOutput > VALUE_SETPOINT_MAX) || (pidOutput < -VALUE_SETPOINT_MAX)) {
+
+        pidOutput = VALUE_SETPOINT_MAX;
     }
-    //valuePID += 128;
-    motorLaunch(valuePID);
+    motorLaunch(pidOutput);
 }

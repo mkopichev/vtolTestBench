@@ -3,7 +3,7 @@
         {
             "name": "AVR",
             "intelliSenseMode": "${default}",
-            "compilerPath": "C:\\Users\\HONOR\\avr-gcc-12.1.0_avrdude-7.0\\bin\\avr-gcc.exe",
+            "compilerPath": "C:\\Users\\GET-5\\Programming\\avr-gcc-12.1.0-x86-windows\\bin\\avr-gcc.exe",
             "cStandard": "${default}",
             "cppStandard": "${default}",
             "includePath": [],
@@ -15,6 +15,8 @@
                 "-fpermissive",
                 "-fno-exceptions",
                 "-fno-threadsafe-statics",
+                "-ffunction-sections",
+                "-fdata-sections",
                 "-pipe",
                 "-mmcu=atmega328p",
                 "-DF_CPU=16000000UL"
