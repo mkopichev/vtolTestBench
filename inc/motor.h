@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-#define MOTOR_CW false
+#define MOTOR_CW  false
 #define MOTOR_CCW true
 
 void motorInit(void);
