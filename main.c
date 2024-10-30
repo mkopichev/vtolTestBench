@@ -1,8 +1,7 @@
 #include "inc/common.h"
 
-extern uint16_t potentiometerValue;
-
-void initAll(void);
+extern float potFilteredValue;
+extern float pidOutput;
 
 int main(void) {
 
@@ -10,17 +9,11 @@ int main(void) {
 
     while(1) {
 
-        motorLaunch(MOTOR_CW, 0);
-        uartTransmitDec(potentiometerValue);
+        uartTransmitStr("potValue: ");
+        uarTransmitFloat(potFilteredValue);
+        uartTransmitStr("\t");
+        uartTransmitStr("pidOutput: ");
+        uarTransmitFloat(pidOutput);
         uartTransmitStr("\r\n");
     }
-}
-
-void initAll() {
-
-    serviceLedInit();
-    uartInit();
-    potentiometerInit();
-    motorInit();
-    _delay_ms(100);
 }

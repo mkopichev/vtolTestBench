@@ -8,10 +8,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "uart.h"
-#include "potentiomter.h"
+#include "potentiometer.h"
 #include "serviceLed.h"
 #include "motor.h"
+#include "control.h"
 
+void initAll(void);
 uint8_t digit(uint16_t d, uint8_t m);
 
 #endif

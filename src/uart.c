@@ -1,6 +1,7 @@
 #include "../inc/uart.h"
 
 #define NO_INTERRUPT
+//#define INTERRUPT
 
 void uartInit(void) {
 

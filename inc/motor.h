@@ -7,6 +7,6 @@
 #define MOTOR_CCW true
 
 void motorInit(void);
-void motorLaunch(bool direction, uint8_t speed);
+void motorLaunch(uint8_t speed);
 
 #endif

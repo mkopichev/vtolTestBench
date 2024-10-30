@@ -3,8 +3,7 @@
 
 #include "common.h"
 
-#define POTENTIOMETER_ADC_CHANNEL 0
-#define POTENTIOMETER_MEAN 512
+#define POT_ADC_CHANNEL 0
 
 void potentiometerInit(void);
 
