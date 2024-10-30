@@ -1,32 +1,10 @@
 {
-<<<<<<< HEAD
-    "files.associations": {
-        "common.h": "c",
-        "uart.h": "c",
-        "serviceled.h": "c",
-        "motor.h": "c",
-        "potentiometer.h": "c"
-    },
+    "AVR.device.type": "atmega328p",
+    "AVR.device.frequency": 16000000,
     "AVR.programmer.type": "arduino",
     "AVR.programmer.port": "COM9",
     "AVR.programmer.rate": 115200,
     "AVR.source.compiler": "C:\\Users\\GET-5\\Programming\\avr-gcc-12.1.0-x86-windows\\bin\\avr-gcc.exe",
     "AVR.programmer.tool": "C:\\Users\\GET-5\\Programming\\avr-gcc-12.1.0-x86-windows\\bin\\avrdude.exe",
-    "AVR.source.libraries": [],
-    "C_Cpp.errorSquiggles": "disabled",
-    "AVR.device.type": "atmega328p",
-    "AVR.device.frequency": 16000000,
-    "AVR.reporter.arguments": [
-        "-A"
-    ]
-=======
-    "AVR.source.compiler": "C:\\Users\\Michael\\avr-gcc-12.1.0_avrdude-7.0\\bin\\avr-gcc.exe",
-    "AVR.programmer.tool": "C:\\Users\\Michael\\avr-gcc-12.1.0_avrdude-7.0\\bin\\avrdude.exe",
-    "AVR.source.libraries": [],
-    "AVR.device.type": "atmega328p",
-    "AVR.device.frequency": 16000000,
-    "AVR.programmer.type": "arduino",
-    "AVR.programmer.port": "COM5",
-    "AVR.programmer.rate": 115200
->>>>>>> 8773e2e09e20e44f0e7321287c1f26e0e0eb1705
+    "AVR.source.libraries": []
 }
