@@ -27,7 +27,7 @@ ISR(TIMER1_OVF_vect) { // executes once in 2.5 ms
     if((pidOutput > VALUE_SETPOINT_MAX) || (pidOutput < -VALUE_SETPOINT_MAX)) 
         pidOutput = VALUE_SETPOINT_MAX;
 
-    if(errorIntegral >= 100000.0)
+    if((errorIntegral > VALUE_ERROR_INTEGRAL_MAX) || (errorIntegral < -VALUE_ERROR_INTEGRAL_MAX))
         errorIntegral = 0.0;
 
     motorLaunch(pidOutput);

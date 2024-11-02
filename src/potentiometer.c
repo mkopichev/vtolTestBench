@@ -13,7 +13,7 @@ void potentiometerInit(void) {
 ISR(ADC_vect) {
 
     potValue = ADCL | (ADCH << 8);
-    potFilteredValue = (potFilteredValue * 0.99) + (potValue * 0.01);
+    potFilteredValue = (potFilteredValue * LPF_BETA) + (potValue * (1.0 - LPF_BETA));
     ADMUX = (1 << REFS0) | POT_ADC_CHANNEL;
     ADCSRA |= (1 << ADSC);
 }
