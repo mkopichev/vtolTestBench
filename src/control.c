@@ -24,11 +24,30 @@ ISR(TIMER1_OVF_vect) { // executes once in 2.5 ms
 
     pidOutput = (Kp * errorCurrent) + (Ki * errorIntegral * dt) + (Kd * errorDif / dt);
 
-    if((pidOutput > VALUE_SETPOINT_MAX) || (pidOutput < -VALUE_SETPOINT_MAX)) 
+    if((pidOutput > VALUE_SETPOINT_MAX) || (pidOutput < -VALUE_SETPOINT_MAX)) {
+
         pidOutput = VALUE_SETPOINT_MAX;
+    }
+    if((errorIntegral > VALUE_ERROR_INTEGRAL_MAX) || (errorIntegral < -VALUE_ERROR_INTEGRAL_MAX)) {
 
-    if((errorIntegral > VALUE_ERROR_INTEGRAL_MAX) || (errorIntegral < -VALUE_ERROR_INTEGRAL_MAX))
         errorIntegral = 0.0;
-
+    }
     motorLaunch(pidOutput);
+
+    static uint8_t ledStripTimeCounter = 0, i = 0, j = 0, hue = 0;
+
+    if(ledStripTimeCounter < ((uint8_t)errorCurrent)) {
+
+        ledStripTimeCounter++;
+    } else {
+
+        ledStripTimeCounter = 0;
+        hue = i;
+        for(j = 0; j < STRIP_LENGTH; j++) {
+
+            hue = hue + 16;
+            hueToRgb(hue, STRIP_BRITHNESS_MEDIUM);
+        }
+        i += 2;
+    }
 }

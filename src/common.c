@@ -7,6 +7,7 @@ void initAll() {
     potentiometerInit();
     motorInit();
     controlInit();
+    ledStripInit();
     _delay_ms(100);
 }
 
