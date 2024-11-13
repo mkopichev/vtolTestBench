@@ -7,7 +7,7 @@
 #define STRIP_BRITHNESS_LOW      1
 #define STRIP_BRITHNESS_MEDIUM   2
 #define STRIP_BRITHNESS_HIGH     3
-#define STRIP_LENGTH             20 // 20 times by 3 LEDs
+#define STRIP_LENGTH             17 // n times by 3 LEDs
 
 struct point {
     uint8_t x;
@@ -27,6 +27,7 @@ typedef struct {
     RGB_data_t *rgbData;
 } rgb_strip_t;
 
+void ledStripInit(void);
 void zeros(void);
 void ones(void);
 void lights(uint8_t G, uint8_t R, uint8_t B);
