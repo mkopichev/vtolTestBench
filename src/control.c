@@ -19,6 +19,14 @@ ISR(TIMER1_OVF_vect) { // executes once in 2.5 ms
     TCNT1 = 0xEC78;
     errorCurrent = VALUE_SETPOINT - potFilteredValue;
     errorIntegral += errorCurrent;
+    // check for integral error value top and bottom limits (for preventing the pidOutput rapid increase)
+    if((errorIntegral > VALUE_ERROR_INTEGRAL_MAX) || (errorIntegral < -VALUE_ERROR_INTEGRAL_MAX)) {
+
+        if(errorIntegral > VALUE_ERROR_INTEGRAL_MAX)
+            errorIntegral = VALUE_ERROR_INTEGRAL_MAX;
+        else
+            errorIntegral = -VALUE_ERROR_INTEGRAL_MAX;
+    }
     errorDif = (errorCurrent - errorPrevious);
     errorPrevious = errorCurrent;
 
@@ -29,18 +37,13 @@ ISR(TIMER1_OVF_vect) { // executes once in 2.5 ms
 
         pidOutput = VALUE_SETPOINT_MAX;
     }
-    // check for integral error value top and bottom limits (for preventing the pidOutput rapid increase)
-    if((errorIntegral > VALUE_ERROR_INTEGRAL_MAX) || (errorIntegral < -VALUE_ERROR_INTEGRAL_MAX)) {
-
-        errorIntegral = 0.0;
-    }
     // check for lever angle and if it is too high - motor goes off
     if(potFilteredValue > 600.0) {
 
         pidOutput = 0.0;
         errorIntegral = 0.0;
     }
-    
+
     motorLaunch(pidOutput);
 
     static uint8_t ledStripTimeCounter = 0, i = 0, j = 0, hue = 0;
