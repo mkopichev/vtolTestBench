@@ -48,7 +48,7 @@ ISR(TIMER1_OVF_vect) { // executes once in 2.5 ms
 
     static uint8_t ledStripTimeCounter = 0, i = 0, j = 0, hue = 0;
 
-    if(ledStripTimeCounter < ((uint8_t)errorCurrent)) {
+    if(ledStripTimeCounter < ((errorCurrent >= 0) ? ((uint8_t)errorCurrent / 2) : ((uint8_t)(-errorCurrent / 2)))) {
 
         ledStripTimeCounter++;
     } else {
