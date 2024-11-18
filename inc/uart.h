@@ -27,7 +27,7 @@ void uartTransmitBin(uint8_t val);
 void uartTransmitHex(uint32_t val);
 
 // transmit float value from mk to terminal
-void uarTransmitFloat(float val);
+void uartTransmitFloat(float val);
 
 // recieve decimal value from terminal to mk
 uint32_t uartReceiveDec(void);

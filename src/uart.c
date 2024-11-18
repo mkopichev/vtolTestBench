@@ -102,7 +102,7 @@ void uartTransmitHex(uint32_t val) {
 }
 
 // transmit float value from mk to terminal
-void uarTransmitFloat(float val) {
+void uartTransmitFloat(float val) {
 
     char buffer[20], float_[10];
     dtostrf(val, 5, 3, float_);

@@ -9,16 +9,16 @@ int main(void) {
     while(1) {
 
         uartTransmitStr("potValue: ");
-        uarTransmitFloat(potFilteredValue);
+        uartTransmitFloat(potFilteredValue);
         uartTransmitStr("\t");
         uartTransmitStr("pidOutput: ");
-        uarTransmitFloat(pidOutput);
+        uartTransmitFloat(pidOutput);
         uartTransmitStr("\t");
         uartTransmitStr("errorCurrent: ");
-        uarTransmitFloat(errorCurrent);
+        uartTransmitFloat(errorCurrent);
         uartTransmitStr("\t");
         uartTransmitStr("errorIntegral: ");
-        uarTransmitFloat(errorIntegral);
+        uartTransmitFloat(errorIntegral);
         uartTransmitStr("\r\n");
     }
 }
