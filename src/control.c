@@ -42,6 +42,9 @@ ISR(TIMER1_OVF_vect) { // executes once in 2.5 ms
 
         pidOutput = 0.0;
         errorIntegral = 0.0;
+        uartTransmitStr("Danger, angle excess\r\n");
+        motorStop();
+        return;
     }
 
     motorLaunch(pidOutput);
