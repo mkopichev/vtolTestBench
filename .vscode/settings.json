@@ -2,9 +2,12 @@
     "AVR.device.type": "atmega328p",
     "AVR.device.frequency": 16000000,
     "AVR.programmer.type": "arduino",
-    "AVR.programmer.port": "COM11",
+    "AVR.programmer.port": "COM4",
     "AVR.programmer.rate": 115200,
     "AVR.source.compiler": "C:\\Users\\GET-5\\Programming\\avr-gcc-12.1.0-x86-windows\\bin\\avr-gcc.exe",
     "AVR.programmer.tool": "C:\\Users\\GET-5\\Programming\\avr-gcc-12.1.0-x86-windows\\bin\\avrdude.exe",
-    "AVR.source.libraries": []
+    "AVR.source.libraries": [],
+    "files.associations": {
+        "motor.h": "c"
+    }
 }

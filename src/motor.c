@@ -14,3 +14,9 @@ void motorLaunch(uint8_t speed) {
     OCR0B = 0;
     OCR0A = speed;
 }
+
+void motorStop() {
+
+    OCR0B = 0;
+    OCR0A = 0;
+}

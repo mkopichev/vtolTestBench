@@ -8,5 +8,6 @@
 
 void motorInit(void);
 void motorLaunch(uint8_t speed);
+void motorStop(void);
 
 #endif
