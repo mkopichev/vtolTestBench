@@ -6,6 +6,9 @@ float pidOutput = 0.0, errorIntegral = 0.0, errorDif = 0.0, errorPrevious = 0.0,
 float Kp = 0.95, Ki = 1.75, Kd = 0.25;
 float dt = 2.5 / 1000.0;
 
+bool angleExcessFlag = false;
+static uint16_t t1Counter = 0;
+
 void controlInit(void) {
 
     TCCR1B = (1 << CS11); // prescaler 8
@@ -14,9 +17,13 @@ void controlInit(void) {
     sei();
 }
 
+#pragma GCC push_options
+#pragma GCC optimize("O0")
+
 ISR(TIMER1_OVF_vect) { // executes once in 2.5 ms
 
     TCNT1 = 0xEC78;
+
     errorCurrent = VALUE_SETPOINT - potFilteredValue;
     errorIntegral += errorCurrent;
     // check for integral error value top and bottom limits (for preventing the pidOutput rapid increase)
@@ -37,14 +44,24 @@ ISR(TIMER1_OVF_vect) { // executes once in 2.5 ms
 
         pidOutput = VALUE_SETPOINT_MAX;
     }
-    // check for lever angle and if it is too high - motor goes off
-    if(potFilteredValue > 600.0) {
 
-        pidOutput = 0.0;
-        errorIntegral = 0.0;
+    // check for lever angle and if it is too high - motor goes off
+    if((potFilteredValue > 600.0) && (!angleExcessFlag)) {
+
+        angleExcessFlag = true;
         uartTransmitStr("Danger, angle excess\r\n");
-        motorStop();
-        return;
+    }
+
+    if(angleExcessFlag) {
+
+        if(t1Counter++ < 2000) {
+
+            pidOutput = 0.0;
+        } else {
+
+            t1Counter = 0;
+            angleExcessFlag = false;
+        }
     }
 
     motorLaunch(pidOutput);
@@ -66,3 +83,5 @@ ISR(TIMER1_OVF_vect) { // executes once in 2.5 ms
         i += 2;
     }
 }
+
+#pragma GCC pop_options
